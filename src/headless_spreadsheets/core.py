@@ -11,6 +11,7 @@ from decimal import Decimal
 from typing import Literal
 
 from .errors import AddressError, ShapeError, SpreadsheetError
+from .formats import NativeJSON
 
 type Scalar = None | bool | int | float | str | Decimal | date | datetime
 type CellInput = Scalar | Cell
@@ -140,7 +141,7 @@ def _collect_rows(
     return tuple(collected), width or 0
 
 
-class Sheet:
+class Sheet(NativeJSON):
     """An editable rectangular grid; edits never resize or calculate the grid."""
 
     def __init__(
@@ -188,7 +189,7 @@ class Sheet:
         self.set(address, Cell(cached_value, formula=formula))
 
 
-class Workbook:
+class Workbook(NativeJSON):
     """Named sheets in insertion order, without a calculation scheduler."""
 
     def __init__(self, sheets: Iterable[Sheet] = (), *, limits: Limits = DEFAULT_LIMITS) -> None:
