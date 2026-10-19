@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import operator
 from collections.abc import Callable, Iterable, Iterator, Mapping, Sequence
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from .core import (
     DEFAULT_LIMITS, Cell, CellInput, Limits, Scalar, Sheet, _collect_rows,
@@ -13,6 +13,9 @@ from .core import (
 from .errors import AddressError, ShapeError, SpreadsheetError
 from .file_io import FilePath, read_text, write_text
 from .formats import NativeJSON
+
+if TYPE_CHECKING:
+    from .rendering import TableDocument
 
 
 def _columns(names: Iterable[str], limits: Limits) -> tuple[str, ...]:
@@ -158,6 +161,26 @@ class _Tabular:
         """Export values, escaping spreadsheet-active text unless explicitly disabled."""
         from .serialization import to_csv
         return write_text(to_csv(self, delimiter=delimiter, formulas=formulas, escape_formulas=escape_formulas), path)
+
+    def to_document(self, *, formulas: bool = False) -> TableDocument:
+        """Capture display text independently of future source edits."""
+        from .rendering import TableDocument
+        return TableDocument.from_table(self, formulas=formulas)
+
+    def render(self, format: str, *, formulas: bool = False, **options) -> str:
+        return self.to_document(formulas=formulas).render(format, **options)
+
+    def to_markdown(self, path: FilePath | None = None, *, formulas: bool = False) -> str:
+        return write_text(self.render("markdown", formulas=formulas), path)
+
+    def to_html(self, path: FilePath | None = None, *, formulas: bool = False) -> str:
+        return write_text(self.render("html", formulas=formulas), path)
+
+    def to_ansi(
+        self, path: FilePath | None = None, *, formulas: bool = False,
+        max_width: int = 32, color: bool = False,
+    ) -> str:
+        return write_text(self.render("ansi", formulas=formulas, max_width=max_width, color=color), path)
 
     def select(self, *columns: str) -> TableView:
         names = _columns(columns, self._root._limits)
