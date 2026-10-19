@@ -123,8 +123,8 @@ native formula-preserving serialization belongs to the original table/grid.
 
 ### Input bounds and failures
 
-`Limits` defaults to 100,000 rows, 1,024 columns, 1,000,000 cells and 16 MB of
-encoded input. Construction checks generators incrementally rather than first
+`Limits` defaults to 100,000 rows, 1,024 columns, 1,000,000 cells, 256 sheets and
+16 MB of encoded input. Construction checks generators incrementally rather than first
 materializing unbounded input. File readers check size and cap reads. Native
 JSON parsing catches malformed/deep input as a format error. These bounds are
 application guardrails, not a hard memory or CPU sandbox. Applications may
