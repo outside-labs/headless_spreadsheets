@@ -1,0 +1,28 @@
+[project]
+name = "headless-spreadsheets"
+version = "0.1.0"
+description = "Spreadsheet-native tables with typed cells and portable, dependency-free interchange."
+readme = "README.md"
+authors = [
+    { name = "ellainng", email = "299958882+ellainng@users.noreply.github.com" }
+]
+requires-python = ">=3.14"
+dependencies = []
+license = "MIT"
+license-files = ["LICENSE"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Office/Business :: Financial :: Spreadsheet",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Source = "https://github.com/outside-labs/headless_spreadsheets"
+Issues = "https://github.com/outside-labs/headless_spreadsheets/issues"
+
+[build-system]
+requires = ["uv_build>=0.12.19,<0.13.0"]
+build-backend = "uv_build"
