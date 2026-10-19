@@ -11,6 +11,8 @@ from .core import (
     as_cell, column_name, split_address,
 )
 from .errors import AddressError, ShapeError, SpreadsheetError
+from .file_io import FilePath, read_text, write_text
+from .formats import NativeJSON
 
 
 def _columns(names: Iterable[str], limits: Limits) -> tuple[str, ...]:
@@ -149,6 +151,14 @@ class _Tabular:
     def to_records(self) -> list[dict[str, Scalar]]:
         return [dict(row) for row in self]
 
+    def to_csv(
+        self, path: FilePath | None = None, *, delimiter: str = ",", formulas: bool = False,
+        escape_formulas: bool = True,
+    ) -> str:
+        """Export values, escaping spreadsheet-active text unless explicitly disabled."""
+        from .serialization import to_csv
+        return write_text(to_csv(self, delimiter=delimiter, formulas=formulas, escape_formulas=escape_formulas), path)
+
     def select(self, *columns: str) -> TableView:
         names = _columns(columns, self._root._limits)
         positions = tuple(self._column_position(name) for name in names)
@@ -222,7 +232,7 @@ class _Tabular:
         return Table(self.columns, ([row[name] for name in self.columns] for row in self), limits=self._root._limits)
 
 
-class Table(_Tabular):
+class Table(_Tabular, NativeJSON):
     """A standalone named table with explicit edits and immutable headers."""
 
     def __init__(
@@ -260,6 +270,23 @@ class Table(_Tabular):
                 current[name] = as_cell(value)
             collected.append(current)
         return cls(names, ([record.get(name) for name in names] for record in collected), limits=limits)
+
+    @classmethod
+    def from_csv(
+        cls, text: str, *, delimiter: str = ",", formulas: bool = False,
+        limits: Limits | None = None,
+    ) -> Table:
+        """Parse CSV text; fields remain literal strings unless formula mode is explicit."""
+        from .serialization import from_csv
+        return from_csv(text, delimiter=delimiter, formulas=formulas, limits=limits)
+
+    @classmethod
+    def read_csv(
+        cls, path: FilePath, *, delimiter: str = ",", formulas: bool = False,
+        limits: Limits | None = None,
+    ) -> Table:
+        selected = DEFAULT_LIMITS if limits is None else limits
+        return cls.from_csv(read_text(path, selected), delimiter=delimiter, formulas=formulas, limits=selected)
 
     @property
     def _root(self) -> Table:
