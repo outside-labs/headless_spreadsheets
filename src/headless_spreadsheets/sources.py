@@ -125,6 +125,8 @@ class TableSource:
         if type(limit) is not int or not 1 <= limit <= 1000 or type(generation) is not int or generation < 0:
             raise SpreadsheetError("Invalid page limit or generation.")
         declared = {column.id: column for column in self.columns}
+        if columns is not None and (type(columns) not in (tuple, list) or any(type(name) is not str for name in columns)):
+            raise SpreadsheetError("Projection requires a sequence of column IDs.")
         selected = tuple(c.id for c in self.columns if c.visible) if columns is None else tuple(columns)
         if (len(selected) > 64 or len(set(selected)) != len(selected)
                 or any(name not in declared or not declared[name].visible for name in selected)
@@ -134,7 +136,7 @@ class TableSource:
             raise SpreadsheetError("Select at most three sort fields.")
         prepared = []
         for item in order:
-            if (type(item) not in (tuple, list) or len(item) != 2 or item[0] not in declared
+            if (type(item) not in (tuple, list) or len(item) != 2 or type(item[0]) is not str or item[0] not in declared
                     or not declared[item[0]].visible or not declared[item[0]].sortable
                     or type(item[1]) is not bool or item[0] in [name for name, _ in prepared]):
                 raise SpreadsheetError("Invalid source sort.")
@@ -168,7 +170,7 @@ class TableSource:
                 raise SpreadsheetError("Cursor does not match source/query.") from None
         # Capture the immutable root tuple once, then evaluate a detached page.
         root_rows = table._root._rows
-        indices = list(table._row_positions)
+        indices = sorted(table._row_positions) if prepared else list(table._row_positions)
         if term:
             indices = [row for row in indices if any(type(value := root_rows[row][self._positions[name]].value) is str and term in value
                                                      for name in search_fields)]

@@ -25,7 +25,7 @@ locations, stale/missing caches and formats. Later Table.set operations cannot
 change captured snapshots. No to_table conversion is used. Formula text is
 opaque and never evaluated or relocated.
 
-Sort nulls last in either direction, with stable original membership order
+Sort nulls last in either direction, with stable original source order
 for ties. Mixed incomparable native values fail explicitly. Source queries
 admit 100,000 rows/1,000,000 cells and 128 source columns, 64 projected columns,
 three sort fields, eight search fields, 256 query code points, 1,000 page rows
@@ -42,4 +42,4 @@ and queries on the application's chosen thread; this source adds no locking or
 background worker. Snapshots remain usable after close. The base package still
 has no mandatory runtime dependencies.
 
-Contract: [tabular/1](https://github.com/outside-labs/compose_application/blob/08f4ddc536c54fd77060f8dcac64c7bc012b6468/docs/tabular-v1.md).
+Contract: [tabular/1](https://github.com/outside-labs/compose_application/blob/d8c4e3a1d4cd1979222c0dddcbf0a14d44ee415c/docs/tabular-v1.md).
