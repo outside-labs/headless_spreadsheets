@@ -33,8 +33,8 @@ class SourceColumn:
             raise SpreadsheetError("Unsupported source column type.")
         if any(type(getattr(self, name)) is not bool for name in ("nullable", "visible", "sortable", "searchable", "writable")):
             raise SpreadsheetError("Capabilities must be exact booleans.")
-        if self.writable or (not self.visible and (self.sortable or self.searchable)) or (self.searchable and self.type != "text"):
-            raise SpreadsheetError("Invalid read-only source capabilities.")
+        if (not self.visible and (self.sortable or self.searchable or self.writable)) or (self.searchable and self.type != "text"):
+            raise SpreadsheetError("Invalid source capabilities.")
 
 
 @dataclass(frozen=True, slots=True)
@@ -109,7 +109,7 @@ class TableSource:
                 result.append(SourceColumn(f"c{position + 1}", name, "text" if text else "native", searchable=text))
             columns = tuple(result)
         self.columns = tuple(columns)
-        if (len(self.columns) != len(positions) or any(not isinstance(column, SourceColumn) for column in self.columns)
+        if (len(self.columns) != len(positions) or any(not isinstance(column, SourceColumn) or column.writable for column in self.columns)
                 or len({column.id for column in self.columns}) != len(self.columns)):
             raise SpreadsheetError("Declare one distinct source column per selected column.")
         self._positions = dict(zip((column.id for column in self.columns), positions, strict=True))
