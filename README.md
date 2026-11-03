@@ -1,5 +1,8 @@
 # Headless Spreadsheets
 
+Read-only [tabular sources and detached snapshots](docs/sources.md) preserve
+source-instance row/column identity and native cell metadata through queries.
+
 Spreadsheet-native tables for ordinary Python applications. Pure Python 3.14+,
 zero runtime dependencies, MIT licensed.
 

@@ -4,6 +4,7 @@ from .core import Cell, CellInput, DataType, Limits, Scalar, Sheet, Workbook, co
 from .errors import AddressError, FormatError, ShapeError, SpreadsheetError
 from .table import Column, Row, Table, TableView
 from .rendering import TableDocument
+from .sources import SourceColumn, SourceRow, TableSnapshot, TableSource
 
 __version__ = "0.1.0"
 
@@ -11,4 +12,5 @@ __all__ = [
     "AddressError", "Cell", "CellInput", "DataType", "FormatError", "Limits",
     "Scalar", "ShapeError", "Sheet", "SpreadsheetError", "Workbook",
     "Column", "Row", "Table", "TableDocument", "TableView", "column_name", "split_address",
+    "SourceColumn", "SourceRow", "TableSnapshot", "TableSource",
 ]

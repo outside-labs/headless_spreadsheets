@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import operator
+from uuid import uuid4
 from collections.abc import Callable, Iterable, Iterator, Mapping, Sequence
 from typing import TYPE_CHECKING, Any
 
@@ -266,6 +267,7 @@ class Table(_Tabular, NativeJSON):
         self._columns = _columns(columns, limits)
         self._column_lookup = {name: index for index, name in enumerate(self._columns)}
         self._rows, _ = _collect_rows(rows, width=len(self._columns), limits=limits)
+        self._source_id = "memory-" + uuid4().hex
 
     @classmethod
     def from_records(

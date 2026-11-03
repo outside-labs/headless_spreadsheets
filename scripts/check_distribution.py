@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PACKAGE = "headless_spreadsheets"
 MODULES = {
     "__init__.py", "core.py", "errors.py", "file_io.py", "formats.py",
-    "rendering.py", "serialization.py", "table.py", "py.typed",
+    "rendering.py", "serialization.py", "sources.py", "table.py", "py.typed",
 }
 
 
