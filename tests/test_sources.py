@@ -59,9 +59,11 @@ class SourceTests(unittest.TestCase):
             source.query(order=[("c1", False)], cursor=first.next_cursor)
 
     def test_invalid_capabilities_and_bounds(self):
-        for kwargs in [dict(writable=True), dict(searchable=True), dict(visible=False), dict(sortable=1)]:
+        for kwargs in [dict(searchable=True), dict(visible=False), dict(sortable=1)]:
             with self.subTest(kwargs=kwargs), self.assertRaises(SpreadsheetError):
                 SourceColumn("c", "Label", **kwargs)
+        with self.assertRaises(SpreadsheetError):
+            TableSource(Table(["x"], [[1]]), columns=[SourceColumn("x", "X", writable=True)])
         source = TableSource(Table(["label"], [["A"]]))
         for query in [dict(columns=["c1", "c1"]), dict(order=[("c1", 1)]), dict(limit=True), dict(generation=-1),
                       dict(search={"fields": ["c1"], "term": "x" * 257}), dict(search={"fields": ["missing"], "term": ""}),

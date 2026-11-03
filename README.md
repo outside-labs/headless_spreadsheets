@@ -6,6 +6,10 @@ source-instance row/column identity and native cell metadata through queries.
 Spreadsheet-native tables for ordinary Python applications. Pure Python 3.14+,
 zero runtime dependencies, MIT licensed.
 
+An explicitly imported [Backpack source adapter](docs/backpack-source.md) adds
+checked scalar edits over caller-registered durable records. It is optional;
+the base package never imports Backpack or opens storage.
+
 Keep typed values, formula text and cached results together, work with named
 records, and move data between Python, CSV, native JSON and table displays.
 
