@@ -2,7 +2,7 @@
 
 The package uses `.github/workflows/release.yaml`, PyPI Trusted Publishing and
 the GitHub environment `pypi`. The publisher identity is organization
-`outside-labs`, repository `headless_spreadsheets`, workflow `release.yaml`,
+`wispsy`, repository `headless_spreadsheets`, workflow `release.yaml`,
 environment `pypi`. No long-lived PyPI secret is needed.
 
 1. Merge the selected work with fresh passing checks. Confirm a clean main,

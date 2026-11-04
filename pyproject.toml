@@ -20,8 +20,8 @@ classifiers = [
 ]
 
 [project.urls]
-Source = "https://github.com/outside-labs/headless_spreadsheets"
-Issues = "https://github.com/outside-labs/headless_spreadsheets/issues"
+Source = "https://github.com/wispsy/headless_spreadsheets"
+Issues = "https://github.com/wispsy/headless_spreadsheets/issues"
 
 [build-system]
 requires = ["uv_build>=0.12.19,<0.13.0"]
