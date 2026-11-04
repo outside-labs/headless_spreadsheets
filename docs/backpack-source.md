@@ -5,7 +5,7 @@ The unreleased optional `headless_spreadsheets.backpack` module consumes public
 source is Backpack `9a691aa551bf7fb42134168452bbdb2e1d454928`:
 
 ```sh
-uv pip install 'backpack-store @ git+https://github.com/outside-labs/backpack.git@9a691aa551bf7fb42134168452bbdb2e1d454928'
+uv pip install 'backpack-store @ git+https://github.com/wispsy/backpack.git@9a691aa551bf7fb42134168452bbdb2e1d454928'
 ```
 
 The caller opens storage, registers the complete dataclass model and codec,

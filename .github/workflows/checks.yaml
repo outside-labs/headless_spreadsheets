@@ -85,7 +85,7 @@ jobs:
           version: '0.12.19'
           python-version: '3.14'
       - run: uv sync --locked
-      - run: uv pip install --python .venv --no-deps "backpack-store @ git+https://github.com/outside-labs/backpack.git@9a691aa551bf7fb42134168452bbdb2e1d454928"
+      - run: uv pip install --python .venv --no-deps "backpack-store @ git+https://github.com/wispsy/backpack.git@9a691aa551bf7fb42134168452bbdb2e1d454928"
       - run: .venv/bin/python -W error::ResourceWarning -m unittest discover -s integration_tests -v
         if: runner.os != 'Windows'
       - run: .venv/Scripts/python -W error::ResourceWarning -m unittest discover -s integration_tests -v

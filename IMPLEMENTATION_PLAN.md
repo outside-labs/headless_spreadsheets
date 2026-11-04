@@ -12,7 +12,7 @@ The initial distribution is `headless-spreadsheets`, imported as
 `headless_spreadsheets`, requiring Python 3.14+. It uses the existing uv build
 scaffold, the Python standard library and **zero runtime dependencies**. No custom
 C/Rust extensions, external services or cloud credentials are required. The source
-repository is public at `outside-labs/headless_spreadsheets`, under the MIT
+repository is public at `wispsy/headless_spreadsheets`, under the MIT
 license. PyPI publication is explicitly selected for v0.1.0, using
 `.github/workflows/release.yaml` and the GitHub environment `pypi`.
 
@@ -221,7 +221,7 @@ The release job reuses checks and publishes only these verified artifacts.
 1. Confirm all five task scopes and docs agree, final-main CI passes and the
    source tree is clean. Ensure the version is 0.1.0 in metadata/public API.
 2. Configure `pypi` with custom tag deployment policy allowing `v0.1.0`. Check
-   PyPI's pending publisher identity matches `outside-labs`, repository
+   PyPI's pending publisher identity matches `wispsy`, repository
    `headless_spreadsheets`, workflow `release.yaml` and environment `pypi`.
 3. Push immutable `v0.1.0` at the verified main SHA. `release.yaml` reuses the
    platform checks, verifies tag/version and main ancestry, builds/inspects/tests
@@ -291,4 +291,4 @@ not implied by immutable cell snapshots or table views in v0.1.
 - [PyPI Trusted Publishing](https://docs.pypi.org/trusted-publishers/using-a-publisher/)
 - [uv with GitHub Actions](https://docs.astral.sh/uv/guides/integration/github/)
 - [Python CSV documentation](https://docs.python.org/3.14/library/csv.html)
-- [Pretty Notebook typed Markdown](https://github.com/outside-labs/pretty-notebook/tree/main/src/pretty_notebook/markdown)
+- [Pretty Notebook typed Markdown](https://github.com/wispsy/pretty-notebook/tree/main/src/pretty_notebook/markdown)

@@ -101,11 +101,11 @@ grouping/joins, async execution and undo/history are later milestones. The nativ
 table writer has no Pretty Notebook dependency; shared typed Markdown extraction
 is tracked separately.
 
-- [API and behavior](https://github.com/outside-labs/headless_spreadsheets/blob/main/docs/api.md)
-- [Interchange contracts](https://github.com/outside-labs/headless_spreadsheets/blob/main/docs/formats.md)
-- [Presentation and Unicode limits](https://github.com/outside-labs/headless_spreadsheets/blob/main/docs/presentation.md)
-- [Implementation plan](https://github.com/outside-labs/headless_spreadsheets/blob/main/IMPLEMENTATION_PLAN.md)
-- [Project and queue](https://github.com/orgs/outside-labs/projects/16)
+- [API and behavior](https://github.com/wispsy/headless_spreadsheets/blob/main/docs/api.md)
+- [Interchange contracts](https://github.com/wispsy/headless_spreadsheets/blob/main/docs/formats.md)
+- [Presentation and Unicode limits](https://github.com/wispsy/headless_spreadsheets/blob/main/docs/presentation.md)
+- [Implementation plan](https://github.com/wispsy/headless_spreadsheets/blob/main/IMPLEMENTATION_PLAN.md)
+- [Project and queue](https://github.com/orgs/wispsy/projects/16)
 
 ## Development
 
@@ -119,5 +119,5 @@ uv run --frozen python scripts/check_distribution.py
 CI tests Python 3.14 on Linux, macOS and Windows. Distribution verification
 checks exact archive contents, metadata, source bytes, source rebuild parity and
 the complete suite in independent wheel/source installations. See
-[release procedures](https://github.com/outside-labs/headless_spreadsheets/blob/main/docs/releases.md)
+[release procedures](https://github.com/wispsy/headless_spreadsheets/blob/main/docs/releases.md)
 for the tag-driven Trusted Publishing workflow.

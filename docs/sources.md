@@ -42,4 +42,4 @@ and queries on the application's chosen thread; this source adds no locking or
 background worker. Snapshots remain usable after close. The base package still
 has no mandatory runtime dependencies.
 
-Contract: [tabular/1](https://github.com/outside-labs/compose_application/blob/d8c4e3a1d4cd1979222c0dddcbf0a14d44ee415c/docs/tabular-v1.md).
+Contract: [tabular/1](https://github.com/wispsy/compose_application/blob/d8c4e3a1d4cd1979222c0dddcbf0a14d44ee415c/docs/tabular-v1.md).
